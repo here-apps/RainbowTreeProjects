@@ -1,0 +1,71 @@
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <Button
+        android:id="@+id/btnIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start" />
+
+    <TextView
+        android:id="@+id/hygrovalue1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Hygrotext1"
+        android:layout_alignBottom="@+id/Hygrotext1"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/Hygrotext1"
+        android:text="0" />
+    
+    <TextView
+        android:id="@+id/hygrovalue2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Hygrotext2"
+        android:layout_alignBottom="@+id/Hygrotext2"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/Hygrotext2"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/tempvalue2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/hygrovalue2"
+        android:layout_below="@+id/hygrovalue2"
+        android:text="0" />
+    
+    
+    <TextView
+        android:id="@+id/Hygrotext1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnIn"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="46dp"
+        android:text="Hygrometer 1： " />
+
+    <TextView
+        android:id="@+id/tempvalue1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/hygrovalue1"
+        android:layout_below="@+id/hygrovalue1"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/Hygrotext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tempvalue1"
+        android:layout_marginTop="35dp"
+        android:layout_toLeftOf="@+id/hygrovalue1"
+        android:text="Hygrometer 2： " />
+    
+</RelativeLayout>
+
