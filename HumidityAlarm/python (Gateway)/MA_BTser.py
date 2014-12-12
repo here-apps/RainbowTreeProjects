@@ -20,7 +20,7 @@ class MoistureDevice:
     __api_key={'apikey': 'e095f4538bac4870'}
     __url= "http://106.186.30.234/api/devices/"
     __headers={'content-type': 'application/json'}
-    __param={'apikey': 'e095f4538bac4870'}    
+    __param={'apikey': 'e095f4538here870'}    
     
     def __init__(self, nodev):
        self.__num=nodev       
