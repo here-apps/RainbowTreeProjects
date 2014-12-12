@@ -6,24 +6,21 @@ import time
 import bluetooth
 import sys
 
-
-dev_num = 2
+dev_num = 1
 port = 1
 
-
 class MoistureDevice:
-    __dev_addr =["98:D3:31:B2:32:27","98:D3:31:40:0B:1C"] 
-    __dev_id=["9here292eec4fc3", "fhere74b33a645f8", "3hereebe7e75427a"]    
-    __ds_h=["vac38b904f7c11e4","vc4be6ab04f7c11e4","vfa6290604f7c11e4"]
-    __ds_t=["va3c78804f7c11e4","vc04650104f7c11e4","vf62f46f04f7c11e4"]
-    __ds_a=["vb55dcd404f7c11e4","vc89cdd604f7c11e4","vfe367bc04f7c11e4"]
-    __api_key={'apikey': 'ehere4538bac4870'}
+    __dev_addr =["98:D3:31:B3:EF:D9"]
+    __dev_id=["45a9b7here5904361"]
+    __ds_m=["vf7332aa0536711e4"]
+    __ds_a=["vf12777b0536711e4"]
+    __api_key={'apikey': 'e095f45herec4870'}
     __url= "http://106.186.30.234/api/devices/"
     __headers={'content-type': 'application/json'}
-    __param={'apikey': 'ehere4538bac4870'}    
+    __param={'apikey': 'e095f45herec4870'}
     
     def __init__(self, nodev):
-       self.__num=nodev       
+       self.__num=nodev
     
     @classmethod
     def getdev(cls, id):
@@ -33,16 +30,14 @@ class MoistureDevice:
         return str
     def getDevAddr(cls, id):
         return cls.__dev_addr[id]
-    def getDS_h(cls, id):
-        return cls.__ds_h[id]    
-    def getDS_t(cls, id):
-        return cls.__ds_t[id]    
+    def getDS_m(cls, id):
+        return cls.__ds_m[id]
     def getDS_a(cls, id):
-        return cls.__ds_a[id] 
+        return cls.__ds_a[id]
     def getHeader(cls):
         return cls.__headers
     def getKey(cls):
-        return cls.__api_key      
+        return cls.__api_key
 
 class ClientThread(threading.Thread, MoistureDevice):
 
@@ -55,7 +50,7 @@ class ClientThread(threading.Thread, MoistureDevice):
         
         self.reConnect()
        
-        print "[+] New thread started for "+ip+":"+str(port)
+#        print "[+] New thread started for "+ip+":"+str(port)
 
     def reConnect(self):
 	print "try reconnect"
@@ -68,12 +63,11 @@ class ClientThread(threading.Thread, MoistureDevice):
 		time.sleep(5)
                 continue
     
-    def run(self):    
+    def run(self):
         print "Thread : "+ str(self.index)
         self.linesplit()
         
     def linesplit(self):
-        print 'here'
         print self.socket
 	try:
         	buffer = self.socket.recv(128)
@@ -91,17 +85,16 @@ class ClientThread(threading.Thread, MoistureDevice):
                     out = line.split(',')
         
                 timestr = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f%zZ")
-                data = {'datapoints' : [{'at': datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f%zZ"), MoistureDevice(dev_num).getDS_h(self.index): out[0], MoistureDevice(dev_num).getDS_t(self.index): out[1], MoistureDevice(dev_num).getDS_a(self.index): out[2]}]}
+                data = {'datapoints' : [{'at': datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f%zZ"), MoistureDevice(dev_num).getDS_m(self.index): out[1], MoistureDevice(dev_num).getDS_a(self.index): out[0]}]}
                 res = requests.post(MoistureDevice(dev_num).geturl(self.index), data=json.dumps(data), headers=MoistureDevice(dev_num).getHeader(), params=MoistureDevice(dev_num).getKey())
                 print res
-
             else:
-		try:
+                try:
                 	more = self.socket.recv(128)
                 except  bluetooth.btcommon.BluetoothError:
 			print "disconnected"
 			self.reConnect()
-			continue			
+			continue
 		if not more:
                     done = True
                 else:
@@ -111,15 +104,14 @@ class ClientThread(threading.Thread, MoistureDevice):
             
 def main():
     DeviceManager=MoistureDevice(dev_num)
-
     
     threads = []
     
-    for x in range(dev_num): 
+    for x in range(dev_num):
 	print DeviceManager.getDevAddr(x)
         newthread = ClientThread(DeviceManager.getDevAddr(x), port, x)
         newthread.start()
         threads.append(newthread)
     
 if __name__ == "__main__":
-    main()    
+    main()
