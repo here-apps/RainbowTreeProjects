@@ -10,7 +10,7 @@ port = 1
 device_id = "af58242e63ed4619"
 datastream_id1 = "v626fa40245211e4"
 param = {'apikey': 'e095f4538bac4870'}
-api_key="e095f4538bac4870"
+api_key="e095f453here4870"
 url = "http://106.186.30.234/api/devices/"+device_id+"/updatedata"
 headers = {'content-type': 'application/json'}
 
